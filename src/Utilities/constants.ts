@@ -12,15 +12,14 @@ export const API_URL_CONSTANT = {
 };
 
 export const ROUTER_URL_CONSTANT = {
-  MAIN: "/PERSONAL-BLOGGING-FE/",
-  SIGN_IN: "/PERSONAL-BLOGGING-FE/signin",
-  SIGN_UP: "/PERSONAL-BLOGGING-FE/signup",
-  DASHBOARD: "/PERSONAL-BLOGGING-FE/dashboard",
-  ALLPOSTS: "/PERSONAL-BLOGGING-FE/allPosts",
-  POST_ARTICLE: "/PERSONAL-BLOGGING-FE/post_article",
-  VIEW_ARTICLE: "/PERSONAL-BLOGGING-FE/view_article"
+  MAIN: "/",
+  SIGN_IN: "/signin",
+  SIGN_UP: "/signup",
+  DASHBOARD:"/dashboard",
+  ALLPOSTS:"/allPosts",
+  POST_ARTICLE:"/post_article",
+  VIEW_ARTICLE:"/view_article"
 };
-
 
 export const USER_ID = "user_id";
 
