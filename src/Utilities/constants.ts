@@ -1,4 +1,4 @@
-export const END_POINT = "http://127.0.0.1:8000/";
+export const END_POINT = "https://personal-bolg-be.onrender.com/";
 
 export const API_URL_CONSTANT = {
   SIGN_IN: `${END_POINT}auth/token`,
@@ -17,7 +17,7 @@ export const ROUTER_URL_CONSTANT = {
   DASHBOARD:"/dashboard",
   ALLPOSTS:"/allPosts",
   POST_ARTICLE:"/post_article",
-  VIEW_ARTICLE:"/view_article/"
+  VIEW_ARTICLE:"/view_article"
 };
 
 export const USER_ID = "user_id";

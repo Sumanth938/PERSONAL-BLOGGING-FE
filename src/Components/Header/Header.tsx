@@ -32,15 +32,15 @@ const Header = () => {
 
   const navLinks = authStatus ? [
     // { id: 1, name: "Home", icon: <FaHome />, navlink: "/" },
-    { id: 2, name: "Feed", icon: <MdOutlineRssFeed />, navlink: "allPosts" },
-    { id: 3, name: "Create Post", icon: <FaPlus  />, navlink: "post_article" },
-    { id: 5, name: "My Feed", icon: <FaRegUser />, navlink: "dashboard" },
+    { id: 2, name: "Feed", icon: <MdOutlineRssFeed />, navlink: "/allPosts" },
+    { id: 3, name: "Create Post", icon: <FaPlus  />, navlink: "/post_article" },
+    { id: 5, name: "My Feed", icon: <FaRegUser />, navlink: "/dashboard" },
     { id: 6, name: "Log Out", icon: <MdLogout />, navlink: "" }
   ] :
   [
-    { id: 1, name: "Feed", icon: <MdOutlineRssFeed />, navlink: "allPosts" },
-    { id: 2, name: "Create Post", icon: <FaPlus  />, navlink: "post_article" },
-    { id: 3, name: "Get Started", icon: <FaRegUser />, navlink: "signin" }
+    { id: 1, name: "Feed", icon: <MdOutlineRssFeed />, navlink: "/allPosts" },
+    { id: 2, name: "Create Post", icon: <FaPlus  />, navlink: "/post_article" },
+    { id: 3, name: "Get Started", icon: <FaRegUser />, navlink: "/signin" }
   ];
   
   const handleLogout = () => {

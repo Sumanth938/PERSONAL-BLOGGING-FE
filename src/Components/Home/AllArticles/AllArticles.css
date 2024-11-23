@@ -27,6 +27,7 @@
 
 .articles-section{
     width: 70%;
+    margin-left: 40px;
 }
 
 .article-card {
@@ -65,4 +66,94 @@
     font-size: 0.8rem;
     font-weight: 500;
     text-align: left;
+}
+
+.article-section-layout{
+  width: 100% !important;
+  display: grid;
+  grid-template-columns: 21% 70%;
+}
+
+.all-articles-layout .side-bar{
+  border: 1px solid #0367a614;
+border-radius: 20px;
+display: flex;
+flex-direction: column;
+gap: 10px;
+padding: 20px;
+margin-top: 10px;
+}
+
+.side-bar .label {
+  word-wrap: break-word !important; /* For older browsers */
+  overflow-wrap: break-word !important; /* Standard property */
+}
+
+
+
+/* Default styles (already provided in your code) */
+
+/* Medium devices (tablets, 768px and up) */
+@media (max-width: 968px) {
+  .articles-section {
+    width: 100%; /* Reduce width for smaller screens */
+    margin: 0px;
+  }
+
+  .article-section-layout {
+    grid-template-columns: 1fr; /* Stack content vertically */
+  }
+
+  .all-articles-layout {
+    padding: 30px; /* Adjust padding for smaller devices */
+    gap: 30px;
+  }
+
+  .article-card {
+    padding: 15px; /* Adjust padding */
+    font-size: 0.9rem; /* Adjust font size */
+  }
+
+  .heading-title .title:before {
+    width: 40px; /* Adjust title underline size */
+  }
+}
+
+/* Small devices (mobile, 480px and up) */
+@media (max-width: 480px) {
+  .articles-section {
+    width: 100%; /* Full width for mobile */
+    padding: 10px;
+    margin: 0px;
+  }
+
+  .heading-title {
+    margin-bottom: 20px; /* Adjust spacing */
+  }
+
+  .heading-title .title {
+    font-size: 1.2rem; /* Adjust title font size */
+  }
+
+  .all-articles-layout {
+    padding: 20px !important;
+  }
+
+  .article-card {
+    padding: 10px; /* Smaller padding for mobile */
+    font-size: 0.8rem;
+  }
+
+  .article-card .article-title {
+    font-size: 0.9rem; /* Adjust title font size */
+  }
+
+  .article-card .article-sub-title {
+    font-size: 0.75rem; /* Adjust subtitle font size */
+  }
+
+  .all-articles-layout .side-bar {
+    border-radius: 10px; /* Smaller border radius */
+    padding: 10px; /* Adjust padding */
+  }
 }
