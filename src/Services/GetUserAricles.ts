@@ -50,7 +50,7 @@ export function fetchUserArticlesApiCall(page: number, size: number) {
             error: null,
           },
         });
-        toast.success(`Articles fetched successfully!`);
+        // toast.success(`Articles fetched successfully!`);
       })
       .catch((error: any) => {
         // Dispatch action with error if API call fails

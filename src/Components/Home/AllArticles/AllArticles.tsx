@@ -8,6 +8,7 @@ import store from "../../../Store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { authSelectors } from "../../../Store/Auth";
 import Loader from "../../Loader/Loader";
+import axios from "axios";
 
 const dispatchStore = store.dispatch as
   | typeof store.dispatch
@@ -40,7 +41,7 @@ const AllArticles: React.FC = () => {
   // Effect to fetch articles when the component mounts or when currentPage changes
   useEffect(() => {
     dispatchStore(
-      fetchArticlesApiCall(currentPage, itemsPerPage, currentAuthorId)
+      fetchArticlesApiCall(currentPage, itemsPerPage, currentAuthorId,Login_User?.id || null)
     ); // Fetch data for the current page
   }, [currentAuthorId, currentPage]);
 
@@ -63,21 +64,26 @@ const AllArticles: React.FC = () => {
 
 
   useEffect(() => {
-    if (articles?.length > 0) {
-      const uniqueAuthors = Array.from(
-        new Set(
-          articles.map((article: any) =>
-            JSON.stringify({
-              author_name: article.posted_by,
-              author_id: article.owner_id,
-            })
-          )
-        )
-      )?.map((author: any) => JSON.parse(author));
+    const fetchAuthors = async () => {
+      try {
+        const response = await axios.get(
+          "https://personal-bolg-be.onrender.com/articles/authors",
+          {
+            headers: {
+              accept: "application/json",
+            },
+          }
+        );
+        if (response?.data?.data) {
+          setAuthors(response.data.data); // Store unique authors in state
+        }
+      } catch (error) {
+        console.error("Error fetching authors:", error);
+      }
+    };
 
-      setAuthors(uniqueAuthors); // Update authors state with unique values
-    }
-  }, [articles]);
+    fetchAuthors();
+  }, []);
 
   //Login User Details
   const Fetch_Login_User = useSelector(authSelectors.getLoginUserState);
@@ -86,6 +92,7 @@ const AllArticles: React.FC = () => {
   const errorUserState = Fetch_Login_User?.error;
 
   console.log(Login_User);
+  const userId = Login_User?.id || null;
 
   if (loader) {
     <Loader />;
@@ -95,8 +102,8 @@ const AllArticles: React.FC = () => {
     <div className="all-articles-layout">
       {/* <ul>
         {authors?.map((author: any) => (
-          <li onClick={() => setCurrentAuthorId(author?.author_id)}>
-            {author?.author_id}.{author?.author_name}
+          <li onClick={() => setCurrentAuthorId(author?.id)}>
+            {author?.id}.{author?.author_name}
           </li>
         ))}
       </ul> */}
@@ -110,21 +117,21 @@ const AllArticles: React.FC = () => {
       <div className="article-section-layout">
         <div className="side-bar">
           <h6>Choose By Author</h6>
-          {authors?.map((author: any) => (
+          {authors?.filter((author: any) => !userId || author.id !== userId)?.map((author: any) => (
             <div
-              key={author?.author_id}
+              key={author?.id}
               className="d-flex align-items-center gap-1"
             >
               <input
                 type="radio"
                 name="author"
                 value={Number(setCurrentAuthorId)}
-                id={`author-${author?.author_id}`}
-                checked={currentAuthorId === author?.author_id}
-                onChange={(e) => setCurrentAuthorId(author.author_id)}
+                id={`author-${author?.id}`}
+                checked={currentAuthorId === author?.id}
+                onChange={(e) => setCurrentAuthorId(author.id)}
               />
-              <label className="label" htmlFor={`author-${author.author_id}`}>
-                {author.author_name}
+              <label className="label" htmlFor={`author-${author.id}`}>
+                {author.name}
               </label>
             </div>
           ))}

@@ -1,4 +1,4 @@
-export const END_POINT = "https://personal-bolg-be.onrender.com/";
+export const END_POINT = "http://127.0.0.1:8000/";
 
 export const API_URL_CONSTANT = {
   SIGN_IN: `${END_POINT}auth/token`,
