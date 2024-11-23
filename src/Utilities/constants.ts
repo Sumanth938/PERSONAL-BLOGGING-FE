@@ -8,6 +8,7 @@ export const API_URL_CONSTANT = {
   GET_ALL_ARTICLES : `${END_POINT}articles/`,
   GET_USER_ARTICLES :`${END_POINT}articles/user_articles`,
   GET_LOGIN_USER:`${END_POINT}auth/`,
+  GET_AUTHORS:`${END_POINT}articles/authors`,
 };
 
 export const ROUTER_URL_CONSTANT = {

@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { authSelectors } from "../../../Store/Auth";
 import Loader from "../../Loader/Loader";
 import axios from "axios";
+import { API_URL_CONSTANT } from "../../../Utilities/constants";
 
 const dispatchStore = store.dispatch as
   | typeof store.dispatch
@@ -41,7 +42,7 @@ const AllArticles: React.FC = () => {
   // Effect to fetch articles when the component mounts or when currentPage changes
   useEffect(() => {
     dispatchStore(
-      fetchArticlesApiCall(currentPage, itemsPerPage, currentAuthorId,Login_User?.id || null)
+      fetchArticlesApiCall(currentPage, itemsPerPage, currentAuthorId)
     ); // Fetch data for the current page
   }, [currentAuthorId, currentPage]);
 
@@ -66,8 +67,7 @@ const AllArticles: React.FC = () => {
   useEffect(() => {
     const fetchAuthors = async () => {
       try {
-        const response = await axios.get(
-          "https://personal-bolg-be.onrender.com/articles/authors",
+        const response = await axios.get(API_URL_CONSTANT.GET_AUTHORS,
           {
             headers: {
               accept: "application/json",
@@ -117,7 +117,7 @@ const AllArticles: React.FC = () => {
       <div className="article-section-layout">
         <div className="side-bar">
           <h6>Choose By Author</h6>
-          {authors?.filter((author: any) => !userId || author.id !== userId)?.map((author: any) => (
+          {authors?.filter((author: any) => userId ? author?.id !== userId : true) .map((author: any) => (
             <div
               key={author?.id}
               className="d-flex align-items-center gap-1"
@@ -139,11 +139,11 @@ const AllArticles: React.FC = () => {
             <button onClick={() => setCurrentAuthorId("")} className="but color-white">Clear</button>
           )}
         </div>
-        {articles?.length === 0 ? (
+        {articles?.filter((article: any) => userId ? article.owner_id !== userId : true).length === 0 ? (
           <p className="text-center">No Articles Found</p>
         ) : (
           <div className="articles-section w-100">
-            {articles?.map((article: any) => (
+            {articles?.filter((article: any) => userId ? article.owner_id !== userId : true).map((article: any) => (
               <div key={article.id} className="article-card">
                 <div className="d-flex flex-row align-items-center gap-2 justify-content-between">
                   <span className="article-title">{article.title}</span>

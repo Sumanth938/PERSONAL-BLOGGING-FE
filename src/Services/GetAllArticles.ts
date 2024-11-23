@@ -5,7 +5,7 @@ import { authActionTypes } from "../Store/Auth";
 import { Pagination } from "react-bootstrap";
 
 // The fetchArticlesApiCall action creator
-export function fetchArticlesApiCall(page: number, size: number, user_id: any,logined_user_id:any) {
+export function fetchArticlesApiCall(page: number, size: number, user_id: any) {
   return (dispatch: any) => {
     // Dispatch action for the start of the API call (loading state)
     dispatch({
@@ -25,13 +25,7 @@ export function fetchArticlesApiCall(page: number, size: number, user_id: any,lo
     // Define the API URL for fetching articles
     const url = `${
       API_URL_CONSTANT.GET_ALL_ARTICLES
-    }?page=${page}&size=${size}${
-      user_id ? `&user_id=${user_id}` : ""
-    }${
-      logined_user_id !== null && logined_user_id !== undefined 
-        ? `&logined_user_id=${logined_user_id}` 
-        : ""
-    }`;
+    }?page=${page}&size=${size}${user_id ? `&user_id=${user_id}` : ``}`;
 
     // Make the API call
     axios
@@ -66,7 +60,7 @@ export function fetchArticlesApiCall(page: number, size: number, user_id: any,lo
             error: error.message || "Failed to fetch articles",
           },
         });
-        toast.error("Failed to fetch articles. Please try again.");
+        // toast.error("Failed to fetch articles. Please try again.");
       });
   };
 }
