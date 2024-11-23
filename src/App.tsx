@@ -38,7 +38,7 @@ function App() {
         pauseOnHover
       // theme="colored"
       />
-      <BrowserRouter>
+      <BrowserRouter  basename="/PERSONAL-BLOGGING-FE">
         <Header />
         <AutoScrollUp />
         <Routes>
